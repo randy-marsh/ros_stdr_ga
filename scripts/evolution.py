@@ -15,3 +15,4 @@ def create():
     """
     ann = buildNetwork(4,1,2, hiddenclass=SigmoidLayer)
     return ann
+

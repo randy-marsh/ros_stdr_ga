@@ -60,6 +60,7 @@ def initANN():
 	# The ANN *must* define N_SONAR input neurons and two output neurons
 
 	rospy.loginfo("You must initialize your ANN, it will crash otherwise") # Your can remove this line safely
+    return ann
 
 def controlLoop(weights):
 	global ann
@@ -129,7 +130,7 @@ if __name__ == '__main__':
 	vel.angular.z = 0
 	velTopic.publish(vel)
 
-	initANN()
+	ann = initANN()
 
 	for i in range(N_SONAR):
 		rospy.Subscriber("/robot0/sonar_"+str(i), Range, callbackSonar, i)
