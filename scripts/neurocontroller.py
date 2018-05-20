@@ -50,17 +50,17 @@ def callbackOdom(msg):
 	#print ("Distance: " + str(distance))
 
 def initANN():
-	global ann
-
-	rospy.loginfo("Building network")
-	# ANN with  N_SONAR inputs and
-	# two outputs for linear and angular velocities
-	ann = create()
+    global ann
     
-	# TODO: Initialize network topology. Use the global variable ann to refer the network
-	# The ANN *must* define N_SONAR input neurons and two output neurons
-
-	rospy.loginfo("You must initialize your ANN, it will crash otherwise") # Your can remove this line safely
+    rospy.loginfo("Building network")
+    # ANN with  N_SONAR inputs and
+    # two outputs for linear and angular velocities
+    ann = create()
+    
+    # TODO: Initialize network topology. Use the global variable ann to refer the network
+    # The ANN *must* define N_SONAR input neurons and two output neurons
+    
+    rospy.loginfo("You must initialize your ANN, it will crash otherwise") # Your can remove this line safely
     return ann
 
 def controlLoop(weights):
