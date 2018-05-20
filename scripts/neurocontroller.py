@@ -61,7 +61,7 @@ def initANN():
 	# The ANN *must* define N_SONAR input neurons and two output neurons
 
 	rospy.loginfo("You must initialize your ANN, it will crash otherwise") # Your can remove this line safely
-    return ann
+return ann
 
 def controlLoop(weights):
 	global ann
