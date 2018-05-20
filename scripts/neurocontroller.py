@@ -13,6 +13,8 @@ from ros_stdr_ga.srv import *
 
 from subprocess import call
 
+from evolutiontion import create
+
 # Parameters, do not touch it
 N_SONAR = 4 # Number of sonars in the robot
 
@@ -53,7 +55,7 @@ def initANN():
 	rospy.loginfo("Building network")
 	# ANN with  N_SONAR inputs and
 	# two outputs for linear and angular velocities
-	
+	ann = create()
 	# TODO: Initialize network topology. Use the global variable ann to refer the network
 	# The ANN *must* define N_SONAR input neurons and two output neurons
 

@@ -8,4 +8,10 @@ Evolution.py
 from pybrain.tools.shortcuts import buildNetwork
 from pybrain.structure.modules.sigmoidlayer import SigmoidLayer
 
-ann = buildNetwork(4,1,2, hiddenclass=SigmoidLayer)
+
+def create():
+    """
+    creates a new net
+    """
+    ann = buildNetwork(4,1,2, hiddenclass=SigmoidLayer)
+    return ann
