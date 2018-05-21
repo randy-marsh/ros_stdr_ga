@@ -30,11 +30,12 @@ ann = None
 distance = 0 
 
 def callbackSonar(msg, arg):
-	#rospy.loginfo("%f: [%f]"%(arg, msg.range))
-	if msg.range == float("inf"):
-		msg.range = msg.max_range
-
-	ranges[arg] = msg.max_range / msg.range # Normalize ranges, needed to feed the ANN
+    global ranges
+    #rospy.loginfo("%f: [%f]"%(arg, msg.range))
+    if msg.range == float("inf"):
+        msg.range = msg.max_range
+    # Normalize ranges, needed to feed the ANN
+    ranges[arg] = msg.max_range / msg.range
 
 def callbackOdom(msg):
 	global distance
@@ -64,82 +65,86 @@ def initANN():
     return ann
 
 def controlLoop(weights):
-	global ann
-	global distance
+    global ann
+    global distance
+    
+    vel = Twist()
+    iterations = 0
+    rospy.loginfo("Weights: " + str(weights))
+    # TODO: Set ANN weights with the array weights
+    ann._setParameters(weights)
+    rate = rospy.Rate(10)
+    while (not rospy.is_shutdown()) and iterations < 30: # 30 iterations seems enougth
+        # TODO: Feed the ANN with global variable ranges and store its output as an array of two floats
+        out = None
+        
+        # Move the robot according to the ANN output
+        out = ann.activate(ranges)
+        vel.linear.x = out[0] * LINEAR_MUL
+        vel.angular.z = out[1] * ANGULAR_MUL
+        velTopic.publish(vel)
+    	
+        iterations = iterations + 1
+        rate.sleep()
+    
+    # Stop robot motion
+    vel.linear.x = 0
+    vel.angular.z = 0
+    velTopic.publish(vel)
 
-	vel = Twist()
-	iterations = 0
-
-	# TODO: Set ANN weights with the array weights
-
-	rate = rospy.Rate(10)
-	while (not rospy.is_shutdown()) and iterations < 30: # 30 iterations seems enougth
-		# TODO: Feed the ANN with global variable ranges and store its output as an array of two floats
-		out = None
-
-		# Move the robot according to the ANN output
-		vel.linear.x = out[0] * LINEAR_MUL
-		vel.angular.z = out[1] * ANGULAR_MUL
-		velTopic.publish(vel)
-		iterations = iterations + 1
-		rate.sleep()
-
-	# Stop robot motion
-	vel.linear.x = 0
-	vel.angular.z = 0
-	velTopic.publish(vel)
-
-	# Compute fitness
-	fit = distance + math.sqrt(math.pow(odom[0]-initX, 2) + math.pow(odom[1]-initY,2))
-	rospy.loginfo("Fitness: " + str(fit))
-	return(fit)
+    # Compute fitness
+    fit = distance + math.sqrt(math.pow(odom[0]-initX, 2) + math.pow(odom[1]-initY,2))
+    rospy.loginfo("Fitness: " + str(fit))
+    return(fit)
 
 def handle_computeFitness(req):
-	# Stop robot motion
-	# (Needed because of previous runs)
-	vel = Twist()
-	vel.linear.x = 0
-	vel.angular.z = 0
-	velTopic.publish(vel)
+    # Stop robot motion
+    # (Needed because of previous runs)
+    vel = Twist()
+    vel.linear.x = 0
+    vel.angular.z = 0
+    velTopic.publish(vel)
 
-	# Reset distance
-	global distance
-	distance = 0
-
-	rospy.loginfo("Init neurocontrol")
-	weights = []
-	for i in req.ann: weights.append(i)
-	rospy.loginfo(weights)
-	# Reset simulation
-	try:
-		call(["rosservice", "call", "/robot0/replace", "[10,1.5,0]"]) # I know, nasty code, fix it 
-		fitness = controlLoop(weights)
-	except rospy.ServiceException:
-		print "Service call failed"
+    # Reset distance
+    global distance
+    distance = 0
+    rospy.loginfo("Init neurocontrol")
+    weights = []
+    for i in req.ann:
+        rospy.loginfo("req.ann: " + str(i))
+        weights.append(i)
+    rospy.loginfo(weights)
+    # Reset simulation
+    try:
+        call(["rosservice", "call", "/robot0/replace", "[10,1.5,0]"]) # I know, nasty code, fix it 
+        fitness = controlLoop(weights)
+    except rospy.ServiceException:
+        print "Service call failed"
 
 	return fitness
 
 if __name__ == '__main__':
-	global ann
-	rospy.init_node('neurocontroller')
-	
-	# Stop robot motion
-	# (Needed because of previous runs)
-	velTopic = rospy.Publisher("/robot0/cmd_vel", Twist, queue_size=10)
-	vel = Twist()
-	vel.linear.x = 0
-	vel.angular.z = 0
-	velTopic.publish(vel)
+    global ann
 
-	ann = initANN()
-
-	for i in range(N_SONAR):
-		rospy.Subscriber("/robot0/sonar_"+str(i), Range, callbackSonar, i)
-
-	rospy.Subscriber("/robot0/odom", Odometry, callbackOdom)
-
-	rospy.Service('computeFitness', computeFitness, handle_computeFitness)
-	rospy.loginfo("Waiting")
-	rospy.spin()
+    
+    rospy.init_node('neurocontroller')
+    # Stop robot motion
+    # (Needed because of previous runs)
+    velTopic = rospy.Publisher("/robot0/cmd_vel", Twist, queue_size=10)
+    vel = Twist()
+    vel.linear.x = 0
+    vel.angular.z = 0
+    velTopic.publish(vel)
+    
+    ann = initANN()
+    
+    for i in range(N_SONAR):
+        rospy.Subscriber("/robot0/sonar_"+str(i), Range, callbackSonar, i)
+    
+    rospy.Subscriber("/robot0/odom", Odometry, callbackOdom)
+    
+    rospy.Service('computeFitness', computeFitness, handle_computeFitness)
+    rospy.loginfo("Waiting")
+    rospy.spin()
 
 
