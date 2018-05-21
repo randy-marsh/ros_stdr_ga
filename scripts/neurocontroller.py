@@ -13,7 +13,7 @@ from ros_stdr_ga.srv import *
 
 from subprocess import call
 
-from evolution import create
+
 
 from pybrain.tools.shortcuts import buildNetwork
 from pybrain.structure.modules.sigmoidlayer import SigmoidLayer
