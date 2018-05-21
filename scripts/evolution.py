@@ -17,8 +17,8 @@ from subprocess import call
 
 
 def generate_phenotype(random, args):
-#    size = args.get('num_inputs', 10)
-    return np.random.normal(size=(9,))
+    size = args.get('num_inputs', 9)
+    return [random.gauss(0, 1) for i in range(size)]
 
 
 
@@ -54,6 +54,7 @@ final_pop = es.evolve(generator=generate_phenotype,
                       maximize=True,
                       max_evaluations=20,
                       mutation_rate=0.25,
+                      num_inputs=9,
                       )
 # Sort and print the best individual, who will be at index 0.
 final_pop.sort(reverse=True)
