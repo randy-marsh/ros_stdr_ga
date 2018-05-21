@@ -118,13 +118,14 @@ def handle_computeFitness(req):
     weights = []
     rospy.loginfo("req.ann: " +str(req.ann))
     for i in req.ann:
-        rospy.loginfo("req.ann: " + str(i))
         weights.append(i)
     rospy.loginfo(weights)
     # Reset simulation
     try:
         call(["rosservice", "call", "/robot0/replace", "[10,1.5,0]"]) # I know, nasty code, fix it 
         fitness = controlLoop(weights)
+        
+        rospy.loginfo("fitness: " + str(fitness))
     except rospy.ServiceException:
         print "Service call failed"
 
