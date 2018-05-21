@@ -15,6 +15,9 @@ from subprocess import call
 
 from evolution import create
 
+from pybrain.tools.shortcuts import buildNetwork
+from pybrain.structure.modules.sigmoidlayer import SigmoidLayer
+
 # Parameters, do not touch it
 N_SONAR = 4 # Number of sonars in the robot
 
@@ -51,13 +54,16 @@ def callbackOdom(msg):
 	#print ("Distance: " + str(distance))
 
 def initANN():
+    """
+    creates a new net
+    """
     global ann
     
     rospy.loginfo("Building network")
     # ANN with  N_SONAR inputs and
     # two outputs for linear and angular velocities
-    ann = create()
-    
+    ann = buildNetwork(4,1,2, hiddenclass=SigmoidLayer)
+
     # TODO: Initialize network topology. Use the global variable ann to refer the network
     # The ANN *must* define N_SONAR input neurons and two output neurons
     
