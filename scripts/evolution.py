@@ -5,14 +5,56 @@ Evolution.py
 @author: Juan
 """
 
-from pybrain.tools.shortcuts import buildNetwork
-from pybrain.structure.modules.sigmoidlayer import SigmoidLayer
+import numpy as np
+from random import Random
+from time import time
+from inspyred import ec
+from inspyred.ec import terminators
+
+from subprocess import call
 
 
-def create():
+
+
+def generate_phenotype(random, args):
+#    size = args.get('num_inputs', 10)
+    return np.random.normal(size=(9,))
+
+
+
+def evaluate_population(candidates, args):
     """
-    creates a new net
+    My evaluation function
+    
+    :param: 
     """
-    ann = buildNetwork(4,1,2, hiddenclass=SigmoidLayer)
-    return ann
+    fitness = []
+    for cs in candidates:
+        try:
+            arg = str(list(cs))
+            output = call(["rosservice", "call", "/computeFitness", arg]) 
+            fit = float(output.split(" ")[1])
+        except Exception as e:
+            print(__file__)
+            print(e)
+            return(0)
+    fitness.append(fit)
+    return fitness
 
+
+rand = Random()
+rand.seed(int(time()))
+# No idea
+es = ec.ES(rand)
+es.terminator = terminators.evaluation_termination
+
+final_pop = es.evolve(generator=generate_phenotype,
+                      evaluator=evaluate_population,
+                      pop_size=100,
+                      maximize=True,
+                      max_evaluations=20,
+                      mutation_rate=0.25,
+                      )
+# Sort and print the best individual, who will be at index 0.
+final_pop.sort(reverse=True)
+print(final_pop[0])
