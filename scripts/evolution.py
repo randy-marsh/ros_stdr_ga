@@ -5,7 +5,6 @@ Evolution.py
 @author: Juan
 """
 
-import numpy as np
 from random import Random
 from time import time
 from inspyred import ec
@@ -34,11 +33,11 @@ def evaluate_population(candidates, args):
             arg = str(list(cs))
             output = call(["rosservice", "call", "/computeFitness", arg]) 
             fit = float(output.split(" ")[1])
+            fitness.append(fit)
         except Exception as e:
             print(__file__)
             print(e)
-            return(0)
-    fitness.append(fit)
+#            return(0)
     return fitness
 
 
