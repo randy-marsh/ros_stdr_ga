@@ -113,6 +113,7 @@ def handle_computeFitness(req):
     rospy.loginfo("req.ann: " +str(req.ann))
     for i in req.ann:
         rospy.loginfo("req.ann: " + str(i))
+        rospy.loginfo("req.ann[i]: " + str(req.ann[i]))
         weights.append(i)
     rospy.loginfo(weights)
     # Reset simulation
