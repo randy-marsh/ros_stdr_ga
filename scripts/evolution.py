@@ -31,8 +31,9 @@ def evaluate_population(candidates, args):
     for cs in candidates:
         try:
             arg = str(list(cs))
-            output = call(["rosservice", "call", "/computeFitness", arg]) 
-            print output
+            print "arg: " + str(arg)
+            output = call(["rosservice", "call", "/computeFitness", arg])
+            print "compute fitness: " + str(output)
             fit = float(output.split(" ")[1])
             fitness.append(fit)
         except Exception as e:
