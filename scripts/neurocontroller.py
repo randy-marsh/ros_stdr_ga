@@ -110,6 +110,7 @@ def handle_computeFitness(req):
     distance = 0
     rospy.loginfo("Init neurocontrol")
     weights = []
+    rospy.loginfo("req.ann: " + str(i))
     for i in req.ann:
         rospy.loginfo("req.ann: " + str(i))
         weights.append(i)
