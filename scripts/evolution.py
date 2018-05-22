@@ -12,7 +12,7 @@ from inspyred.ec import terminators
 
 from subprocess import call
 import rospy
-
+from ros_stdr_ga.srv import *
 
 
 def generate_phenotype(random, args):
