@@ -150,7 +150,7 @@ if __name__ == '__main__':
     
     rospy.Subscriber("/robot0/odom", Odometry, callbackOdom)
     # Create a ROS Service called computeFitness
-    rospy.Service('computeFitness', computeFitness, handle_computeFitness)
+    s = rospy.Service('computeFitness', computeFitness, handle_computeFitness)
     rospy.loginfo("Waiting")
     rospy.spin()
 
