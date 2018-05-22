@@ -60,4 +60,4 @@ final_pop = es.evolve(generator=generate_phenotype,
 # Sort and print the best individual, who will be at index 0.
 final_pop.sort(reverse=True)
 print(final_pop[0])
-pickle.dumps(final_pop, open('/home/viki/final_pop', 'w'))
+pickle.dump(final_pop, open('/home/viki/final_pop', 'w'))
