@@ -36,6 +36,7 @@ def evaluate_population(candidates, args):
         except rospy.ServiceException as exc:
             print("Service did not process request: " + str(exc))
             fit = 0
+        print("fitness: " + str(fit))
         fitness.append(fit)
     return fitness
 
