@@ -31,6 +31,7 @@ def evaluate_population(candidates, args):
     for cs in candidates:
         rospy.wait_for_service('computeFitness')
         add_two_ints = rospy.ServiceProxy('computeFitness', computeFitness)
+        print "weights: " + str(cs)
         try:
             fit = add_two_ints(cs)
         except rospy.ServiceException as exc:
