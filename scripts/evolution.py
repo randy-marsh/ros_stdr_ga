@@ -11,7 +11,7 @@ from inspyred import ec
 from inspyred.ec import terminators
 
 from subprocess import call
-
+import rospy
 
 
 
@@ -29,17 +29,14 @@ def evaluate_population(candidates, args):
     """
     fitness = []
     for cs in candidates:
+        rospy.wait_for_service('computeFitness')
+        add_two_ints = rospy.ServiceProxy('computeFitness', computeFitness)
         try:
-            arg = str(list(cs))
-            print "arg: " + str(arg)
-            output = call(["rosservice", "call", "/computeFitness", arg])
-            print "compute fitness: " + str(output)
-            fit = float(output.split(" ")[1])
-            fitness.append(fit)
-        except Exception as e:
-            print(__file__)
-            print(e)
-#            return(0)
+            fit = add_two_ints(cs)
+        except rospy.ServiceException as exc:
+            print("Service did not process request: " + str(exc))
+            fit = 0
+        fitness.append(fit)
     return fitness
 
 

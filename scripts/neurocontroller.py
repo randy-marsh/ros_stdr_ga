@@ -116,7 +116,6 @@ def handle_computeFitness(req):
     distance = 0
     rospy.loginfo("Init neurocontrol")
     weights = []
-    rospy.loginfo("req.ann: " +str(req.ann))
     for i in req.ann:
         weights.append(i)
     rospy.loginfo(weights)
@@ -150,7 +149,7 @@ if __name__ == '__main__':
         rospy.Subscriber("/robot0/sonar_"+str(i), Range, callbackSonar, i)
     
     rospy.Subscriber("/robot0/odom", Odometry, callbackOdom)
-    
+    # Create a ROS Service called computeFitness
     rospy.Service('computeFitness', computeFitness, handle_computeFitness)
     rospy.loginfo("Waiting")
     rospy.spin()
