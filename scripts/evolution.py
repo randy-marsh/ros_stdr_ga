@@ -9,6 +9,7 @@ from random import Random
 from time import time
 from inspyred import ec
 from inspyred.ec import terminators
+import pickle
 
 from subprocess import call
 import rospy
@@ -52,10 +53,11 @@ final_pop = es.evolve(generator=generate_phenotype,
                       evaluator=evaluate_population,
                       pop_size=100,
                       maximize=True,
-                      max_evaluations=20,
+                      max_evaluations=100,
                       mutation_rate=0.25,
                       num_inputs=9,
                       )
 # Sort and print the best individual, who will be at index 0.
 final_pop.sort(reverse=True)
 print(final_pop[0])
+pickle.dumps(final_pop, open('/home/viki/final_pop', 'w'))

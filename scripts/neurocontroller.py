@@ -123,11 +123,8 @@ def handle_computeFitness(req):
     try:
         call(["rosservice", "call", "/robot0/replace", "[10,1.5,0]"]) # I know, nasty code, fix it 
         fitness = controlLoop(weights)
-        
-        rospy.loginfo("fitness: " + str(fitness))
     except rospy.ServiceException:
         print "Service call failed"
-    rospy.loginfo("just about to returnfitness: " + str(fitness))
     return fitness
 
 if __name__ == '__main__':
