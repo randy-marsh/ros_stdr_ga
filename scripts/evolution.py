@@ -53,7 +53,7 @@ final_pop = es.evolve(generator=generate_phenotype,
                       evaluator=evaluate_population,
                       pop_size=100,
                       maximize=True,
-                      max_evaluations=10000,
+                      max_evaluations=20000,
                       mutation_rate=0.25,
                       num_inputs=9,
                       )
