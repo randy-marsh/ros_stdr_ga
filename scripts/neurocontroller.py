@@ -128,7 +128,7 @@ def handle_computeFitness(req):
     except rospy.ServiceException:
         print "Service call failed"
     rospy.loginfo("just about to returnfitness: " + str(fitness))
-	return fitness
+    return fitness
 
 if __name__ == '__main__':
     global ann
