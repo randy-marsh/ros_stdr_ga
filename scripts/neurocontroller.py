@@ -17,6 +17,7 @@ from subprocess import call
 
 from pybrain.tools.shortcuts import buildNetwork
 from pybrain.structure.modules.sigmoidlayer import SigmoidLayer
+from pybrain.structure import TanhLayer
 
 # Parameters, do not touch it
 N_SONAR = 4 # Number of sonars in the robot
@@ -62,7 +63,7 @@ def initANN():
     rospy.loginfo("Building network")
     # ANN with  N_SONAR inputs and
     # two outputs for linear and angular velocities
-    ann = buildNetwork(4,1,2, hiddenclass=SigmoidLayer)
+    ann = buildNetwork(4,1,2, hiddenclass=TanhLayer)
 
     # TODO: Initialize network topology. Use the global variable ann to refer the network
     # The ANN *must* define N_SONAR input neurons and two output neurons
