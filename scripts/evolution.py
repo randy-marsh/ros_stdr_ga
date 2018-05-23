@@ -49,17 +49,18 @@ if __name__ == '__main__':
     rand.seed(int(time()))
     # No idea
     #es = ec.ES(rand)
-    ga = ec.GA(rand)
+#    ga = ec.GA(rand)
+    dea = ec.DEA(rand)
     #ga.evolve()
     #es.terminator = terminators.evaluation_termination
     ga.terminator = terminators.evaluation_termination
     
-    final_pop = ga.evolve(generator=generate_phenotype,
+    final_pop = dea.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
                           pop_size=10,
 #                          num_selected=0,
                           maximize=True,
-                          max_evaluations=100,
+                          max_evaluations=50,
                           crossover_rate=0.9,
                           mutation_rate=0.2,
                           num_inputs=9,
