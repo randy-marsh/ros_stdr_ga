@@ -53,7 +53,7 @@ if __name__ == '__main__':
     dea = ec.DEA(rand)
     #ga.evolve()
     #es.terminator = terminators.evaluation_termination
-    ga.terminator = terminators.evaluation_termination
+    dea.terminator = terminators.evaluation_termination
     
     final_pop = dea.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
