@@ -31,10 +31,10 @@ def evaluate_population(candidates, args):
     fitness = []
     for cs in candidates:
         rospy.wait_for_service('computeFitness')
-        add_two_ints = rospy.ServiceProxy('computeFitness', computeFitness)
+        getFitnes = rospy.ServiceProxy('computeFitness', computeFitness)
         print "weights: " + str(cs)
         try:
-            fit = add_two_ints(cs)
+            fit = getFitnes(cs)
         except rospy.ServiceException as exc:
             print("Service did not process request: " + str(exc))
             fit = 0
@@ -51,9 +51,9 @@ es.terminator = terminators.evaluation_termination
 
 final_pop = es.evolve(generator=generate_phenotype,
                       evaluator=evaluate_population,
-                      pop_size=100,
+                      pop_size=10,
                       maximize=True,
-                      max_evaluations=20000,
+                      max_evaluations=100,
                       mutation_rate=0.25,
                       num_inputs=9,
                       )
