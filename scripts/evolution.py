@@ -58,7 +58,8 @@ if __name__ == '__main__':
                           evaluator=evaluate_population,
                           pop_size=10,
                           maximize=True,
-                          max_evaluations=100,
+                          max_evaluations=10,
+                          crossover_rate=0.9,
                           mutation_rate=0.25,
                           num_inputs=9,
                           )
