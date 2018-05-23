@@ -57,10 +57,11 @@ if __name__ == '__main__':
     final_pop = ga.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
                           pop_size=10,
+                          num_selected=3,
                           maximize=True,
                           max_evaluations=10,
                           crossover_rate=0.9,
-                          mutation_rate=0.25,
+                          mutation_rate=0.1,
                           num_inputs=9,
                           )
     # Sort and print the best individual, who will be at index 0.
