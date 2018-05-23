@@ -43,21 +43,26 @@ def evaluate_population(candidates, args):
     return fitness
 
 
-rand = Random()
-rand.seed(int(time()))
-# No idea
-es = ec.ES(rand)
-es.terminator = terminators.evaluation_termination
-
-final_pop = es.evolve(generator=generate_phenotype,
-                      evaluator=evaluate_population,
-                      pop_size=10,
-                      maximize=True,
-                      max_evaluations=100,
-                      mutation_rate=0.25,
-                      num_inputs=9,
-                      )
-# Sort and print the best individual, who will be at index 0.
-final_pop.sort(reverse=True)
-print(final_pop[0])
-pickle.dump(final_pop, open('/home/viki/final_pop', 'w'))
+if __name__ == '__main__':
+    
+    rand = Random()
+    rand.seed(int(time()))
+    # No idea
+    #es = ec.ES(rand)
+    ga = ec.GA(rand)
+    #ga.evolve()
+    #es.terminator = terminators.evaluation_termination
+    ga.terminator = terminators.evaluation_termination
+    
+    final_pop = ga.evolve(generator=generate_phenotype,
+                          evaluator=evaluate_population,
+                          pop_size=10,
+                          maximize=True,
+                          max_evaluations=100,
+                          mutation_rate=0.25,
+                          num_inputs=9,
+                          )
+    # Sort and print the best individual, who will be at index 0.
+    final_pop.sort(reverse=True)
+    print(final_pop[0])
+    pickle.dump(final_pop, open('/home/viki/final_pop', 'w'))
