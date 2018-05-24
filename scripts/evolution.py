@@ -8,7 +8,7 @@ Evolution.py
 from random import Random
 from time import time
 from inspyred import ec
-from inspyred.ec import terminators
+from inspyred.ec import terminators, variators
 import pickle
 
 from subprocess import call
@@ -54,6 +54,7 @@ if __name__ == '__main__':
     #ga.evolve()
     #es.terminator = terminators.evaluation_termination
     dea.terminator = terminators.generation_termination
+    dea.variator = variators.arithmetic_crossover
     
     final_pop = dea.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
