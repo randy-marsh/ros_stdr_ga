@@ -62,7 +62,7 @@ if __name__ == '__main__':
                           maximize=True,
                           max_evaluations=50,
                           crossover_rate=0.9,
-                          mutation_rate=0.2,
+                          mutation_rate=0.1,
                           num_inputs=9,
                           )
     # Sort and print the best individual, who will be at index 0.
