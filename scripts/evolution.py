@@ -53,12 +53,12 @@ if __name__ == '__main__':
     dea = ec.DEA(rand)
     #ga.evolve()
     #es.terminator = terminators.evaluation_termination
-    dea.terminator = terminators.evaluation_termination
+    dea.terminator = terminators.generation_termination
     
     final_pop = dea.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
                           pop_size=10,
-                          num_generations=50,
+                          max_generations=50,
 #                          num_selected=0,
 #                          maximize=True,
 #                          max_evaluations=50,
