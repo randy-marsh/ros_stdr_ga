@@ -69,6 +69,8 @@ if __name__ == '__main__':
 #                          gaussianstdev=0.5
                           )
     # Sort and print the best individual, who will be at index 0.
-    final_pop.sort(reverse=True)
-    print(final_pop[0])
+    best = max(final_pop)
+    print('Best Solution: \n{0}'.format(str(best)))
+#    final_pop.sort(reverse=True)
+#    print(final_pop[0])
     pickle.dump(final_pop, open('/home/viki/final_pop', 'w'))
