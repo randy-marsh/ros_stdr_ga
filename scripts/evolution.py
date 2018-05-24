@@ -60,11 +60,11 @@ if __name__ == '__main__':
                           pop_size=10,
 #                          num_selected=0,
 #                          maximize=True,
-                          max_evaluations=50,
-                          crossover_rate=0.9,
-                          mutation_rate=0.1,
+#                          max_evaluations=50,
+#                          crossover_rate=0.9,
+#                          mutation_rate=0.1,
                           num_inputs=9,
-                          gaussianstdev=0.5
+#                          gaussianstdev=0.5
                           )
     # Sort and print the best individual, who will be at index 0.
     final_pop.sort(reverse=True)
