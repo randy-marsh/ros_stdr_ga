@@ -58,6 +58,7 @@ if __name__ == '__main__':
     final_pop = dea.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
                           pop_size=10,
+                          num_generations=1,
 #                          num_selected=0,
 #                          maximize=True,
 #                          max_evaluations=50,
