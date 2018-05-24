@@ -59,7 +59,7 @@ if __name__ == '__main__':
                           evaluator=evaluate_population,
                           pop_size=10,
 #                          num_selected=0,
-                          maximize=True,
+                          maximize=False,
                           max_evaluations=50,
                           crossover_rate=0.9,
                           mutation_rate=0.1,
