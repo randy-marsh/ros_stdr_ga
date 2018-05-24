@@ -49,19 +49,21 @@ if __name__ == '__main__':
     rand.seed(int(time()))
     # No idea
     #es = ec.ES(rand)
-#    ga = ec.GA(rand)
-    dea = ec.DEA(rand)
+    ga = ec.GA(rand)
+#    dea = ec.DEA(rand)
     #ga.evolve()
     #es.terminator = terminators.evaluation_termination
-    dea.terminator = terminators.generation_termination
-    dea.variator = variators.arithmetic_crossover
+#    dea.terminator = terminators.generation_termination
+#    dea.variator = variators.arithmetic_crossover
+    ga.terminator = terminators.generation_termination
+    ga.variator = variators.arithmetic_crossover
     
-    final_pop = dea.evolve(generator=generate_phenotype,
+    final_pop = ga.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
                           pop_size=10,
                           max_generations=50,
 #                          num_selected=0,
-#                          maximize=True,
+                          maximize=True,
 #                          max_evaluations=50,
 #                          crossover_rate=0.9,
 #                          mutation_rate=0.1,
