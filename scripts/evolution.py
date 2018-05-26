@@ -7,6 +7,7 @@ Evolution.py
 
 from random import Random
 from time import time
+import inspyred
 from inspyred import ec
 from inspyred.ec import terminators, variators
 import pickle
