@@ -43,10 +43,10 @@ def evaluate_population(candidates, args):
         fitness.append(fit)
     return fitness
 # from https://gist.github.com/dfbarrero/70138ef2b76c51dade887eb4f7f06fa8
-def showStatistics(population, num_generations, num_evaluations, args):
-    stats = inspyred.ec.analysis.fitness_statistics(population)
-    print('Generation {0}, best fit {1}, avg. fit {2}'.format(num_generations,
-          stats['best'], stats['mean']))
+#def showStatistics(population, num_generations, num_evaluations, args):
+#    stats = inspyred.ec.analysis.fitness_statistics(population)
+#    print('Generation {0}, best fit {1}, avg. fit {2}'.format(num_generations,
+#          stats['best'], stats['mean']))
 
 
 if __name__ == '__main__':
