@@ -19,7 +19,7 @@ from ros_stdr_ga.srv import *
 
 def generate_phenotype(random, args):
     size = args.get('num_inputs', 9)
-    return [random.gauss(0, 1.) for i in range(size)]
+    return [random.gauss(0, 0.5) for i in range(size)]
 
 
 
