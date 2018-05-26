@@ -32,7 +32,7 @@ def evaluate_population(candidates, args):
     for cs in candidates:
         rospy.wait_for_service('computeFitness')
         getFitnes = rospy.ServiceProxy('computeFitness', computeFitness)
-        print "weights: " + str(cs)
+#        print "weights: " + str(cs)
         try:
             fit = getFitnes(cs)
         except rospy.ServiceException as exc:
@@ -41,6 +41,11 @@ def evaluate_population(candidates, args):
         print("fitness: " + str(fit))
         fitness.append(fit)
     return fitness
+# from https://gist.github.com/dfbarrero/70138ef2b76c51dade887eb4f7f06fa8
+def showStatistics(population, num_generations, num_evaluations, args):
+    stats = inspyred.ec.analysis.fitness_statistics(population)
+    print('Generation {0}, best fit {1}, avg. fit {2}'.format(num_generations,
+          stats['best'], stats['mean']))
 
 
 if __name__ == '__main__':
@@ -57,11 +62,12 @@ if __name__ == '__main__':
 #    dea.variator = variators.arithmetic_crossover
     ga.terminator = terminators.generation_termination
     ga.variator = variators.arithmetic_crossover
+    ga.observer = showStatistics
     
     final_pop = ga.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
                           pop_size=10,
-                          max_generations=50,
+                          max_generations=5,
 #                          num_selected=0,
                           maximize=True,
 #                          max_evaluations=50,
