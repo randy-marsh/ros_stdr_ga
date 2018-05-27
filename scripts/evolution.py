@@ -54,19 +54,19 @@ if __name__ == '__main__':
     rand = Random()
     rand.seed(int(time()))
     # No idea
-    #es = ec.ES(rand)
-    ga = ec.GA(rand)
+    es = ec.ES(rand)
+#    ga = ec.GA(rand)
 #    dea = ec.DEA(rand)
     #ga.evolve()
     #es.terminator = terminators.evaluation_termination
 #    dea.terminator = terminators.generation_termination
 #    dea.variator = variators.arithmetic_crossover
-    ga.terminator = terminators.generation_termination
-    ga.variator = variators.arithmetic_crossover
-    ga.bounder = inspyred.ec.Bounder
+    es.terminator = terminators.generation_termination
+    es.variator = variators.arithmetic_crossover
+    es.bounder = inspyred.ec.Bounder
 #    ga.observer = showStatistics
     
-    final_pop = ga.evolve(generator=generate_phenotype,
+    final_pop = es.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
                           pop_size=10,
                           max_generations=3,
@@ -74,9 +74,9 @@ if __name__ == '__main__':
                           maximize=True,
 #                          max_evaluations=50,
 #                          crossover_rate=0.9,
-                          mutation_rate=0.1,
+#                          mutation_rate=0.1,
                           num_inputs=30,
-                          num_elites=1
+#                          num_elites=1
 #                          gaussianstdev=0.5
                           )
     # Sort and print the best individual, who will be at index 0.
