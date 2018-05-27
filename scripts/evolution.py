@@ -67,7 +67,7 @@ if __name__ == '__main__':
     
     final_pop = ga.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
-                          pop_size=10,
+                          pop_size=5,
                           max_generations=3,
 #                          num_selected=0,
                           maximize=True,
