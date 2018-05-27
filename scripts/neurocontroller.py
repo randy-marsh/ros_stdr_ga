@@ -79,7 +79,9 @@ def controlLoop(weights):
     iterations = 0
     rospy.loginfo("Weights: " + str(weights))
     # TODO: Set ANN weights with the array weights
+    print "holaa"
     ann._setParameters(weights)
+    print "despues del set parmas"
     rate = rospy.Rate(10)
     while (not rospy.is_shutdown()) and iterations < 30: # 30 iterations seems enougth
         # TODO: Feed the ANN with global variable ranges and store its output as an array of two floats
