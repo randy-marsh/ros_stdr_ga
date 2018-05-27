@@ -120,7 +120,7 @@ def handle_computeFitness(req):
     weights = []
     for i in req.ann:
         weights.append(i)
-    rospy.loginfo(weights)
+#    rospy.loginfo(weights)
     # Reset simulation
     try:
         call(["rosservice", "call", "/robot0/replace", "[10,1.5,0]"]) # I know, nasty code, fix it 
