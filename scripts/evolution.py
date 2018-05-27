@@ -19,7 +19,7 @@ from ros_stdr_ga.srv import *
 
 def generate_phenotype(random, args):
     size = args.get('num_inputs', 30)
-    return [random.gauss(0, 0.5) for i in range(size)]
+    return [random.gauss(0, 1.0) for i in range(size)]
 
 
 
@@ -67,20 +67,20 @@ if __name__ == '__main__':
     
     final_pop = ga.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
-                          pop_size=5,
+                          pop_size=10,
                           max_generations=3,
 #                          num_selected=0,
                           maximize=True,
 #                          max_evaluations=50,
 #                          crossover_rate=0.9,
-                          mutation_rate=0.4,
+                          mutation_rate=0.1,
                           num_inputs=30,
                           num_elites=1
 #                          gaussianstdev=0.5
                           )
     # Sort and print the best individual, who will be at index 0.
-    best = max(final_pop)
-    print('Best Solution: \n{0}'.format(str(best)))
-#    final_pop.sort(reverse=True)
-#    print(final_pop[0])
+#    best = max(final_pop)
+#    print('Best Solution: \n{0}'.format(str(best)))
+    final_pop.sort(reverse=True)
+    print(final_pop[0])
     pickle.dump(final_pop, open('/home/viki/final_pop', 'w'))
