@@ -68,8 +68,8 @@ if __name__ == '__main__':
     
     final_pop = es.evolve(generator=generate_phenotype,
                           evaluator=evaluate_population,
-                          pop_size=5,
-                          max_generations=1,
+                          pop_size=100,
+                          max_generations=30,
 #                          num_selected=0,
 #                          maximize=True,
 #                          max_evaluations=50,
