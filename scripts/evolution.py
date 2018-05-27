@@ -11,6 +11,7 @@ import inspyred
 from inspyred import ec
 from inspyred.ec import terminators, variators
 import pickle
+import logging
 
 from subprocess import call
 import rospy
@@ -50,6 +51,14 @@ def evaluate_population(candidates, args):
 
 
 if __name__ == '__main__':
+    
+    logger = logging.getLogger('inspyred.ec')
+    logger.setLevel(logging.DEBUG)
+    file_handler = logging.FileHandler('inspyred.log', mode='w')
+    file_handler.setLevel(logging.DEBUG)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
     
     rand = Random()
     rand.seed(int(time()))
