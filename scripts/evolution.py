@@ -71,7 +71,7 @@ if __name__ == '__main__':
                           pop_size=10,
                           max_generations=3,
 #                          num_selected=0,
-                          maximize=True,
+#                          maximize=True,
 #                          max_evaluations=50,
 #                          crossover_rate=0.9,
 #                          mutation_rate=0.1,
