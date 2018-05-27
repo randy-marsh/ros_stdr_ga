@@ -86,6 +86,7 @@ def controlLoop(weights):
         out = None
         
         # Move the robot according to the ANN output
+        rospy.loginfo("Ranges: " + str(ranges))
         out = ann.activate(ranges)
         vel.linear.x = out[0] * LINEAR_MUL
         vel.angular.z = out[1] * ANGULAR_MUL
