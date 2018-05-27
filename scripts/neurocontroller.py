@@ -86,7 +86,7 @@ def controlLoop(weights):
         out = None
         
         # Move the robot according to the ANN output
-        rospy.loginfo("RANGES: " + str(ranges))
+#        rospy.loginfo("RANGES: " + str(ranges))
         out = ann.activate(ranges)
         vel.linear.x = out[0] * LINEAR_MUL
         vel.angular.z = out[1] * ANGULAR_MUL
@@ -129,13 +129,6 @@ def handle_computeFitness(req):
         print "Service call failed"
     return fitness
 
-def update_sonar():
-    """
-    Update sonar letures
-    """
-    
-    for i in range(N_SONAR):
-        rospy.Subscriber("/robot0/sonar_"+str(i), Range, callbackSonar, i)
     
 if __name__ == '__main__':
     global ann

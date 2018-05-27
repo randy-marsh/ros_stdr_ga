@@ -63,6 +63,7 @@ if __name__ == '__main__':
 #    dea.variator = variators.arithmetic_crossover
     ga.terminator = terminators.generation_termination
     ga.variator = variators.arithmetic_crossover
+    ga.bounder = inspyred.ec.Bounder
 #    ga.observer = showStatistics
     
     final_pop = ga.evolve(generator=generate_phenotype,
