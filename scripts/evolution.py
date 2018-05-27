@@ -18,7 +18,7 @@ from ros_stdr_ga.srv import *
 
 
 def generate_phenotype(random, args):
-    size = args.get('num_inputs', 9)
+    size = args.get('num_inputs', 30)
     return [random.gauss(0, 0.5) for i in range(size)]
 
 
@@ -74,7 +74,7 @@ if __name__ == '__main__':
 #                          max_evaluations=50,
 #                          crossover_rate=0.9,
                           mutation_rate=0.4,
-                          num_inputs=9,
+                          num_inputs=30,
                           num_elites=1
 #                          gaussianstdev=0.5
                           )
